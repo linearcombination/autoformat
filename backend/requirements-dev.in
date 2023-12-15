@@ -1,0 +1,26 @@
+-c requirements.txt
+black
+cohesion
+dlint
+flake8
+# flake8-annotations-complexity # not Python 3.11 ready
+flake8-annotations-coverage
+# flake8-bandit # not Python 3.11 ready
+flake8-eradicate
+flake8-fixme
+flake8-mypy
+flake8-type-annotations
+isort
+mypy
+psutil
+pygount
+pylint
+pylsp-mypy
+pytest
+pytest-celery
+pytest-datafiles
+pytest-icdiff
+pytest-repeat
+pytest-xdist
+radon
+vulture

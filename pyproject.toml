@@ -1,0 +1,53 @@
+[project]
+name = "Autoformat"
+version = "2023.12.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    ]
+
+[build-system]
+requires = [
+    "setuptools>=61",
+    "wheel",
+    "cython",
+    "mypy",
+]
+build-backend = "setuptools.build_meta"
+[tool.setuptools.packages.find]
+where = ["backend", "tests"]
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+addopts = [
+    "--tb=long",
+    "--showlocals",
+    "-x",
+#   "--pdb",
+#   "--maxfail=4",
+#   "--last-failed",
+    "--failed-first",
+    "--log-file=tests_output.log",
+    "--log-cli-level=DEBUG",
+    "--strict-markers",
+    ]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::SyntaxWarning",
+    ]
+# markers = [
+#     "datafiles", # : Load datafiles fixture
+#     "slow", # : Marks tests as slow (deselect with '-m "not slow"')
+#     "randomized", # : Tests that are randomly built combinatorically at runtime using fixtures and not suitable for ci/cd production runs
+#     "docx", # : Marks the majority of tests that test generation of docx output so that they can be run in isolation during development.
+#     ]
+# Speed up pytest collection times
+norecursedirs = [
+  # "docs",
+  "*.egg-info",
+  ".git",
+]
+[tool.isort]
+profile = "black"
+multi_line_output = 3

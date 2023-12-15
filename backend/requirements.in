@@ -1,0 +1,47 @@
+DOC @ file:///Users/lriley/src/WA/github.com/linearcombination/DOC
+# DOC @ https://github.com/linearcombination/DOC/archive/refs/tags/0.0.9.zip
+# cython # For pydantic: https://pydantic-docs.helpmanual.io/install/
+# Markdown
+# PyYAML
+# aiofiles
+# beautifulsoup4
+# celery
+# celery-types
+# docxtpl
+# fastapi[all]
+# flower
+# htmldocx
+# html2docx
+# gunicorn
+# jinja2
+# jsonpath-rw
+# jsonpath-rw-ext
+# lxml
+# more-itertools
+# orjson
+pydantic
+# pydantic-core
+# pydantic-settings
+# email-validator
+# psutil
+# python-dotenv
+# pyyaml
+# redis
+# requests
+setuptools
+# termcolor
+# toolz
+# trio
+# usfm_tools @ https://github.com/linearcombination/USFM-Tools/archive/refs/tags/0.0.9.zip
+# uvicorn
+# weasyprint
+
+# types-PyYAML
+# types-Markdown
+# types-beautifulsoup4
+# types-ujson
+# types-orjson
+# types-requests
+# types-termcolor
+types-toml
+types-setuptools
