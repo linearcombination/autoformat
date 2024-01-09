@@ -1,8 +1,8 @@
 import sys
 
-from typing import Any, Mapping, Sequence, TypeVar
+from typing import Any, Mapping, Optional, Sequence, TypeVar
 import os
-from os.path import join, sep, basename
+from os.path import exists, join, sep, basename
 
 from document.domain import resource_lookup
 from document.config import settings
@@ -164,9 +164,21 @@ def usfm_check_for_lang(
             # at least find issues. We would need to determine the git repo where
             # the zips are coming from in order to see if that repo was mirrored so
             # that we could clone and make changes there.
+            #
+            # Check if the resource has already been checked and only proceed for
+            # this resource if resource_dir does not physically exist. This makes
+            # usfm_checker restartable, which is nice since it checks a LOT of
+            # repos.
+            resource_dir = resource_lookup.resource_directory(
+                resource_lookup_dto.lang_code,
+                resource_lookup_dto.book_code,
+                resource_lookup_dto.resource_type,
+            )
+            if exists(resource_dir):
+                continue
             resource_dir = resource_lookup.provision_asset_files(resource_lookup_dto)
             content_file = None
-            html = ""
+            html: Optional[str] = None
             try:
                 content_file = parsing.usfm_asset_file(
                     resource_lookup_dto, resource_dir
@@ -181,6 +193,15 @@ def usfm_check_for_lang(
                 log_event(
                     {
                         "event": "content_file is None",
+                        "resource_lookup_dto": resource_lookup_dto,
+                        "content_file": content_file,
+                        "resource_dir": resource_dir,
+                    }
+                )
+            elif not html:
+                log_event(
+                    {
+                        "event": "html is None",
                         "resource_lookup_dto": resource_lookup_dto,
                         "content_file": content_file,
                         "resource_dir": resource_dir,
