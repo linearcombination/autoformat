@@ -51,7 +51,7 @@ T = TypeVar("T")
 logger = settings.logger(__name__)
 
 
-def resource_types_and_names_for_heart_lang(
+def resource_types_and_names(
     lang_code: str,
     working_dir: str = settings.RESOURCE_ASSETS_DIR,
     english_resource_type_map: Mapping[str, str] = settings.ENGLISH_RESOURCE_TYPE_MAP,
@@ -62,12 +62,6 @@ def resource_types_and_names_for_heart_lang(
     tq_resource_types: Sequence[str] = settings.TQ_RESOURCE_TYPES,
     tw_resource_types: Sequence[str] = settings.TW_RESOURCE_TYPES,
 ) -> Sequence[tuple[str, str]]:
-    """
-    Convenience method that can be called from UI to get the set
-    of all resource type, name tuples for a given language available
-    through API. Presumably this could be called to populate a
-    drop-down menu or as an API method.
-    """
     if lang_code == "en":
         return [(key, value) for key, value in english_resource_type_map.items()]
     if lang_code == "id":
@@ -140,9 +134,7 @@ def usfm_check_for_lang(
     # Could be more than one USFM type per language, e.g., ulb and f10
     usfm_resource_types_and_names = [
         resource_type_and_name
-        for resource_type_and_name in resource_types_and_names_for_heart_lang(
-            lang_code_and_name[0]
-        )
+        for resource_type_and_name in resource_types_and_names(lang_code_and_name[0])
         if resource_type_and_name[0] in usfm_resource_types
     ]
     book_codes = resource_lookup.book_codes_for_lang(lang_code_and_name[0])
